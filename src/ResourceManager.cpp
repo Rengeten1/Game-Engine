@@ -5,14 +5,14 @@ ResourceManager::ResourceManager() {}
 
 ResourceManager::~ResourceManager() {
     for (auto& resource : resources) {
-        delete resource.second;
+        delete static_cast<int*>(resource.second);
     }
     resources.clear();
 }
 
 void ResourceManager::loadResource(const std::string& resourceName, const std::string& filePath) {
     // Placeholder for actual resource loading logic
-    void* resource = new int; // Placeholder for actual resource type
+    int* resource = new int; // Placeholder for actual resource type
     resources[resourceName] = resource;
     std::cout << "Resource " << resourceName << " loaded from " << filePath << std::endl;
 }
@@ -20,7 +20,7 @@ void ResourceManager::loadResource(const std::string& resourceName, const std::s
 void ResourceManager::unloadResource(const std::string& resourceName) {
     auto it = resources.find(resourceName);
     if (it != resources.end()) {
-        delete it->second;
+        delete static_cast<int*>(it->second);
         resources.erase(it);
         std::cout << "Resource " << resourceName << " unloaded." << std::endl;
     }

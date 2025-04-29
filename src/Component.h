@@ -3,8 +3,11 @@
 
 class Component {
 public:
-    virtual ~Component() {}
+    virtual ~Component() = default;
     virtual int getType() const = 0;
+
+protected:
+    int type;
 };
 
 #endif // COMPONENT_H
